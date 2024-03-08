@@ -34,8 +34,9 @@ public class Product extends Ttest  {
             String detailsProductPrice = driver.findElement(By.cssSelector("#cart_contents_container > div > div.cart_list > div.cart_item > div.cart_item_label > div.item_pricebar > div")).getText();
 
             // Порівняння текстів
-           Assert.assertEquals("Назва продукту  збігається", detailsProductName, cartProductName);
-           Assert.assertEquals("Ціна продукту збігається", detailsProductPrice, cartProductPrice);
+           Assert.assertEquals(detailsProductName=cartProductName, "Sauce Labs Backpack", "Назва продукту однакова");
+           Assert.assertEquals(detailsProductPrice=cartProductPrice,"$29.99", "Ціна продукту однакова");
+
         }
         @Test
         public void backProduct(){
@@ -46,11 +47,30 @@ public class Product extends Ttest  {
     }
 
     @Test
-    public void BasketNumber(){
+    public void TrashFolderNumber(){
+        driver.get("https://www.saucedemo.com/v1/inventory.html");
+        // Отримуємо інформацію про перший товар на сторінці
+        String productTitle = driver.findElement(By.cssSelector("#item_4_title_link > div")).getText();
+        String productPrice = driver.findElement(By.cssSelector("#inventory_container > div > div:nth-child(1) > div.pricebar > div")).getText();
 
+        // Клікаємо на назву першого товару
+        driver.findElement(By.cssSelector("#item_4_title_link > div")).click();
+
+        // Очікуємо, що відкриється нова сторінка з одним товаром
+        // Клацкаємо на кнопку "Додати до кошика"
+        driver.findElement(By.cssSelector("#inventory_item_container > div > div > div > button")).click();
+
+        // Перевірка, що на кнопці корзина з'явилася одиниця
+        String cartItemCount = driver.findElement(By.cssSelector("#shopping_cart_container > a > span")).getText();
+        Assert.assertEquals(cartItemCount, "1", "Кількість товарів у кошику відображається правильно" );
+
+
+
+        // Додаткові дії та перевірки за необхідності
+    }
     }
 
-}
+
 
 
 

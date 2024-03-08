@@ -21,7 +21,7 @@ public class Ttest {
     @AfterTest
     public void afterTest() {
         if ( driver != null ) {
-            //           driver.quit();
+                       driver.quit();
         }
         System.out.println("afterTest");
     }
