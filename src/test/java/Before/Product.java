@@ -2,6 +2,7 @@ package Before;
 
 import org.openqa.selenium.By;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -47,7 +48,7 @@ public class Product extends Ttest  {
     }
 
     @Test
-    public void TrashFolderNumber(){
+    public void TrashFolderNumber() {
         driver.get("https://www.saucedemo.com/v1/inventory.html");
         // Отримуємо інформацію про перший товар на сторінці
         String productTitle = driver.findElement(By.cssSelector("#item_4_title_link > div")).getText();
@@ -62,11 +63,14 @@ public class Product extends Ttest  {
 
         // Перевірка, що на кнопці корзина з'явилася одиниця
         String cartItemCount = driver.findElement(By.cssSelector("#shopping_cart_container > a > span")).getText();
-        Assert.assertEquals(cartItemCount, "1", "Кількість товарів у кошику відображається правильно" );
+        Assert.assertEquals(cartItemCount, "1", "Кількість товарів у кошику відображається правильно");
+    }
+    @AfterClass
+    public static void tearDown() {
+        driver.get("https://www.saucedemo.com/v1/inventory.html");
+        driver.findElement(By.cssSelector("#menu_button_container > div > div:nth-child(3) > div > button")).click();
+        driver.findElement(By.cssSelector("#logout_sidebar_link")).click();
 
-
-
-        // Додаткові дії та перевірки за необхідності
     }
     }
 

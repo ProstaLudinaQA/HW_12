@@ -8,7 +8,7 @@ import org.testng.annotations.BeforeTest;
 import java.time.Duration;
 
 public class Ttest {
-    WebDriver driver;
+    static WebDriver driver;
 
     @BeforeTest
     public void beforeTest() {
